@@ -28,7 +28,9 @@
         </div>
         <p
           v-if="invalidInput"
-        >One or more input fields are invalid. Please check your provided data.</p>
+        >
+        One or more input fields are invalid. Please check your provided data.</p>
+        <p v-if="error">{{error}}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -38,12 +40,15 @@
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      error:null,
     };
   },
   // emits: ['survey-submit'],
@@ -59,7 +64,7 @@ export default {
       //   userName: this.enteredName,
       //   rating: this.chosenRating,
       // });
-
+        this.error=null;
       fetch('https://vuedb-64594-default-rtdb.asia-southeast1.firebasedatabase.app/surveys.json',{
         method:'POST',
         headers:{
@@ -70,6 +75,15 @@ export default {
           rating:this.chosenRating,
         })
         
+      })
+      .then((response)=>{
+        if(!response.ok){
+          throw new Error('Could not save the data')
+        }
+      })
+      .catch((error)=>{
+        this.error=error;
+        console.log(error)
       });
 
       this.enteredName = '';
