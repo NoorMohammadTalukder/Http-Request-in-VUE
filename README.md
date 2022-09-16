@@ -1,7 +1,7 @@
 # Http-Request-in-VUE
 this repo is about handling basic HTTP request in VUE
 <h3>Live Website: https://helpful-mochi-d47f71.netlify.app/ </h3>
-<h1>Video Simulation</h1>
+
 
 <h1>Screen Shots of the App</h1>
 
